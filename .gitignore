@@ -1,0 +1,26 @@
+# Dependency directories
+node_modules/
+vendor/
+.env
+agnoenv
+agnoenv\
+agnoenv/
+
+# Build files
+dist/
+build/
+*.exe
+*.class
+
+# IDE/Editor files
+.idea/
+.vscode/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
