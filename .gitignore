@@ -30,3 +30,7 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]  # Also ignores .pyc, .pyo, and .pyd files
