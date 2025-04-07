@@ -1,3 +1,9 @@
+# Local file to not be tracked
+basic_streamlit_ref_code.py
+edge_case_handled.py
+edge_case2.py
+insurance_agents_old.py
+
 # Dependency directories
 node_modules/
 vendor/

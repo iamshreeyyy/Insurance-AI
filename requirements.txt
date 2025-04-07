@@ -9,3 +9,5 @@ streamlit
 pandas
 tantivy
 yfinance
+psycopg2
+pymilvus

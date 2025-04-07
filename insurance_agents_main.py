@@ -2,6 +2,8 @@ import streamlit as st
 from agno.agent import Agent
 from agno.models.groq import Groq
 from agno.tools.duckduckgo import DuckDuckGoTools
+from agno.team.team import Team
+from agno.vectordb.milvus import Milvus
 from typing import Dict, Any
 import os
 import time
@@ -133,37 +135,88 @@ def initialize_insurance_agents():
     )
 
     # Create coordinator with routing tool
-    coordinator = Agent(
+    coordinator = Team(
         name="Insurance Team Coordinator",
-        role="Route inquiries to appropriate insurance specialists and enforce domain boundaries",
+        #role="Route inquiries to appropriate insurance specialists and enforce domain boundaries",
         description="""Master routing system for insurance-related queries that:
         - Validates question relevance to insurance domain
         - Maintains audit trails of specialist assignments
         - Enforces FINRA-style suitability standards
         - Implements fallback protocols for cross-domain queries""",
-        team=[life_insurance_agent, home_insurance_agent, auto_insurance_agent],
+        mode="route",
+        members=[life_insurance_agent, home_insurance_agent, auto_insurance_agent],
         model=Groq(id="llama3-70b-8192", api_key=groq_api_key, temperature=0.2, max_retries=2),
-        tools=[TransferTaskTool()],  # Add routing tool
-        instructions="""DOMAIN CONTROL SYSTEM:
-        1. First-layer filter: Reject non-insurance queries with:
-           "Our specialists only handle insurance matters. Your query about [topic] is outside our scope."
-        
-        2. For valid insurance queries:
-           - Use transfer_task_to_specialist tool with parameters:
-             * task_description: The user's question
-             * expected_output: What type of response is needed
-             * additional_information: Any special instructions
-        
-        3. Routing logic:
-           - Life insurance → Life Specialist
-           - Property → Home Specialist
-           - Vehicle → Auto Specialist
-        
-        4. Compliance checks:
-           - Verify no financial advice beyond insurance products
-           - Block health/legal disguised queries""",
+        #tools=[TransferTaskTool()],  # Add routing tool
+        instructions="""STRICT DOMAIN CONTROL SYSTEM:
+
+        1. CONTENT VALIDATION LAYERS:
+        a) First Filter - Insurance Relevance:
+            - Reject with template: "Our specialists only handle insurance matters. Your query about [topic] is outside our scope."
+            - Exception: Questions mentioning insurance terms but clearly seeking other information (creative writing, dining, etc.)
+
+        b) Second Filter - Request Type:
+            - Block: "We cannot process [policy numbers/location requests/entertainment content]"
+            - Redirect: "For [non-insurance aspect], please consult a [relevant expert]"
+
+        2. QUERY PROCESSING PROTOCOLS:
+        a) For Valid Insurance Queries:
+            - Use transfer_task_to_specialist tool with parameters:
+                * task_description: The exact insurance question
+                * expected_output: Required response format
+                * additional_information: "STRICTLY ADHERE TO: [specialist domain]"
+
+        b) For Mixed Queries:
+            - Process ONLY the insurance portion
+            - Response prefix: "Regarding the insurance aspect: [answer]. Other questions require different experts."
+
+        3. SPECIALIST ROUTING LOGIC:
+        ┌───────────────────────┬─────────────────────────────┐
+        │ Query Type            │ Routing Destination         │
+        ├───────────────────────┼─────────────────────────────┤
+        │ Mortality risk        → Life Specialist             │
+        │ Property valuation    → Home Specialist            │
+        │ Vehicle liability     → Auto Specialist            │
+        │ Cross-domain          → Multi-specialist review    │
+        └───────────────────────┴─────────────────────────────┘
+
+        4. COMPLIANCE ENFORCEMENT:
+        a) Absolute Restrictions:
+            - No financial advice beyond insurance products
+            - No interpretation of medical/legal documents
+            - No third-party recommendations
+
+        b) Required Disclosures:
+            - "This analysis covers insurance only - consult [professional] for other advice"
+            - "Premium estimates may vary based on [factors]"
+
+        5. SECURITY PROTOCOLS:
+        a) Data Handling:
+            - Immediately discard any policy numbers submitted
+            - Flag queries requesting personal advice
+
+        b) Audit Trail:
+            - Log all routing decisions
+            - Flag borderline cases for review
+
+        6. EDGE CASE HANDLING:
+        # In coordinator instructions, modify the creative context handling:
+        a) Creative Contexts:
+        - Template: "We cannot provide [creative writing/historical/entertainment] guidance. 
+                  While your question mentions [insurance term], please consult a [relevant expert]."
+        - NO additional tips or commentary      
+
+        b) Hypotheticals:
+            - "For hypothetical scenarios, we can only provide general product information"
+
+        c) Historical Questions:
+            - "Historical insurance practices may differ significantly from current standards"
+
+        FAILSAFE: When uncertain → "Please rephrase your question focusing specifically on insurance coverage details"
+        """,
+        enable_agentic_context=True,
         show_tool_calls=True,
         markdown=True,
+        show_members_responses=True,
     )
 
     return coordinator
@@ -213,11 +266,7 @@ def main():
 Our specialists only handle insurance-related inquiries. Your question about: 
 '<i>{}</i>' 
 falls outside our scope. 
-
-Please consult appropriate professionals for:
-- Financial planning → Certified Financial Planner
-- Legal matters → Attorney
-- Health advice → Medical Practitioner""".format(prompt[:100] + ("..." if len(prompt) > 100 else ""))
+""".format(prompt[:100] + ("..." if len(prompt) > 100 else ""))
                 else:
                     # Get the response from the coordinator
                     response = insurance_coordinator.run(prompt)
