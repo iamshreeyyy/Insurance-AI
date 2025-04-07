@@ -188,10 +188,10 @@ Project Link: [https://github.com/SamJoeSilvano/Insurance-Agentic-AI](https://gi
 
 ---
 
-## 🖼️ Screenshots
+## 🖼️ Diagram
 
-![System Architecture](system_architecture.jpg)  
-*System Architecture Overview*
+![RAG Pipeline](rag_pipeline.jpg)  
+*Reality Augmented Generation(RAG) Pipeline Overview*
 
 ---
 
