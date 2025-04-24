@@ -11,3 +11,11 @@ tantivy
 yfinance
 psycopg2
 pymilvus
+google-generativeai
+google-genai
+reportlab
+chonkie
+sqlalchemy
+fastapi
+uvicorn
+flask

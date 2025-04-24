@@ -34,3 +34,19 @@ logs/
 # Python bytecode and cache
 __pycache__/
 *.py[cod]  # Also ignores .pyc, .pyo, and .pyd files
+
+# Agent-UI
+agent-ui
+agent-ui\
+agent-ui/
+
+# Folders
+old_code/
+other_code/
+volumes/
+
+# yaml files
+user.yaml
+embedEtcd.yaml
+
+standalone.bat
