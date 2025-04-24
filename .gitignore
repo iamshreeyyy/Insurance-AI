@@ -50,3 +50,5 @@ user.yaml
 embedEtcd.yaml
 
 standalone.bat
+client_secret.json
+secrets.toml
