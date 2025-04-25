@@ -64,7 +64,7 @@ def set_custom_css():
 
 def main():
     set_custom_css()
-    st.title("Insurance Chatbot")
+    st.title("Insurance AI - Knowledge Retrieval System")
 
     if "auth" not in st.session_state:
         oauth2 = OAuth2Component(CLIENT_ID, CLIENT_SECRET, AUTHORIZE_URL, TOKEN_URL)
@@ -98,12 +98,12 @@ def main():
             del st.session_state["token"]
             st.rerun()
 
-        st.sidebar.title("Insurance Chatbot Options")
+        st.sidebar.title("Insurance AI Options")
         if st.sidebar.button("ℹ️ About"):
             st.sidebar.markdown("""
-            This AI Assistant is designed to answer your insurance-related questions.
+            This AI Assistant is designed to answer your insurance-related questions from customer data and to answer general insurance questions
             """)
-        if st.sidebar.button("🗑️ Clear Chat History"):
+        if st.sidebar.button("🗑️ Clear Chat"):
             st.session_state.messages = []
             st.rerun()
 

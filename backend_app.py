@@ -169,5 +169,5 @@ def handle_query():
 
 if __name__ == "__main__":
     # Comment out after first run if you have loaded the knowledge base
-    knowledge_base.load(recreate=False, skip_existing=True)
+    # knowledge_base.load(recreate=True, skip_existing=True)
     app.run(debug=True, port=8000)
