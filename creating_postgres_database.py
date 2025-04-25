@@ -115,6 +115,224 @@ def create_insurance_table_with_data():
                 None, None, None, None,
                 None, None, None, None,
                 'Toyota', 'Camry', 2018, 'Comprehensive'
+            ),
+
+            # Customer 4: Life and Auto Insurance
+            (
+                "Alice", "Brown", date(1985, 7, 10), "Female", "alice.b@email.com", "555-111-2222",
+                "111 Pine St", "New York", "NY", "10001",
+                "POL-1004", ["Life Insurance", "Auto Insurance"], "LA-002", date(2023, 1, 15), date(2043, 1, 15), 275.50,
+                "AGT-001", "Sarah Johnson", "sarah.j@insure.com", "555-987-6543",
+                None, None, None,
+                "PAY-004", date(2023, 1, 15), 275.50, "Credit Card",
+                "Bob Brown", "Spouse", 20, 400000.00,
+                None, None, None, None,
+                "Honda", "Civic", 2020, "Collision"
+            ),
+
+            # Customer 5: Home and Auto Insurance
+            (
+                "Charlie", "Green", date(1992, 3, 25), "Male", "charlie.g@email.com", "555-333-4444",
+                "333 Oak Ln", "Los Angeles", "CA", "90001",
+                "POL-1005", ["Home Insurance", "Auto Insurance"], "HA-003", date(2022, 10, 1), date(2025, 10, 1), 160.20,
+                "AGT-002", "Michael Brown", "michael.b@insure.com", "555-876-5432",
+                None, None, None,
+                "PAY-005", date(2023, 10, 1), 160.20, "Bank Transfer",
+                None, None, None, None,
+                "333 Oak Ln, Los Angeles, CA", 600000.00, "Condo", "Contents",
+                "Tesla", "Model 3", 2022, "Comprehensive"
+            ),
+
+            # Customer 6: Life, Home, and Auto Insurance
+            (
+                "Diana", "Miller", date(1988, 9, 8), "Female", "diana.m@email.com", "555-555-6666",
+                "555 Maple Ave", "Dallas", "TX", "75201",
+                "POL-1006", ["Life Insurance", "Home Insurance", "Auto Insurance"], "LHA-004", date(2024, 2, 1), date(2044, 2, 1), 320.00,
+                "AGT-003", "Lisa Williams", "lisa.w@insure.com", "555-765-4321",
+                None, None, None,
+                "PAY-006", date(2024, 2, 1), 320.00, "Credit Card",
+                "David Miller", "Spouse", 20, 750000.00,
+                "555 Maple Ave, Dallas, TX", 450000.00, "Single Family", "Building",
+                "Ford", "F-150", 2021, "Liability"
+            ),
+            # Customer 7: Life Insurance
+            (
+                'Peter', 'Parker', date(1991, 8, 1), 'Male', 'peter.p@email.com', '555-777-8888',
+                '20 Ingram Street', 'New York', 'NY', '10002',
+                'POL-1007', ['Life Insurance'], 'LIFE-007', date(2024, 1, 1), date(2054, 1, 1), 200.00,
+                'AGT-001', 'Sarah Johnson', 'sarah.j@insure.com', '555-987-6543',
+                None, None, None,
+                'PAY-007', date(2024, 1, 1), 200.00, 'Credit Card',
+                'MJ Watson', 'Girlfriend', 30, 600000.00,
+                None, None, None, None,
+                None, None, None, None
+            ),
+
+            # Customer 8: Home Insurance
+            (
+                'Bruce', 'Wayne', date(1982, 5, 27), 'Male', 'bruce.w@email.com', '555-222-3333',
+                '1007 Mountain Drive', 'Gotham', 'NY', '10005',
+                'POL-1008', ['Home Insurance'], 'HOME-008', date(2023, 9, 1), date(2026, 9, 1), 100.00,
+                'AGT-002', 'Michael Brown', 'michael.b@insure.com', '555-876-5432',
+                None, None, None,
+                'PAY-008', date(2023, 9, 1), 100.00, 'Bank Transfer',
+                None, None, None, None,
+                '1007 Mountain Drive, Gotham, NY', 1000000.00, 'Single Family', 'Building',
+                None, None, None, None
+            ),
+
+            # Customer 9: Auto Insurance
+            (
+                'Clark', 'Kent', date(1989, 12, 7), 'Male', 'clark.k@email.com', '555-444-5555',
+                '344 Clinton Street', 'Metropolis', 'NY', '10009',
+                'POL-1009', ['Auto Insurance'], 'AUTO-009', date(2022, 7, 1), date(2023, 7, 1), 130.50,
+                'AGT-003', 'Lisa Williams', 'lisa.w@insure.com', '555-765-4321',
+                None, None, None,
+                'PAY-009', date(2023, 7, 1), 130.50, 'Credit Card',
+                None, None, None, None,
+                None, None, None, None,
+                'Chevrolet', 'Impala', 1967, 'Liability'
+            ),
+
+            # Customer 10: Life and Home Insurance
+            (
+                "Lois", "Lane", date(1993, 10, 2), "Female", "lois.l@email.com", "555-666-7777",
+                "Daily Planet, Metropolis", "Metropolis", "NY", "10010",
+                "POL-1010", ["Life Insurance", "Home Insurance"], "LH-010", date(2023, 4, 1), date(2043, 4, 1), 220.00,
+                "AGT-001", "Sarah Johnson", "sarah.j@insure.com", "555-987-6543",
+                None, None, None,
+                "PAY-010", date(2023, 4, 1), 220.00, "Credit Card",
+                "Jonathan Kent", "Father", 20, 300000.00,
+                "344 Clinton Street, Metropolis, NY", 750000.00, "Apartment", "Contents",
+                None, None, None, None
+            ),
+
+            # Customer 11: Life Insurance
+            (
+                "Oliver", "Queen", date(1986, 4, 12), "Male", "oliver.q@email.com", "555-111-9999",
+                "Starling Mansion, Starling City", "Starling City", "WA", "98001",
+                "POL-1011", ["Life Insurance"], "LIFE-011", date(2024, 3, 1), date(2064, 3, 1), 180.00,
+                "AGT-004", "Felicity Smoak", "felicity.s@insure.com", "555-123-7890",
+                None, None, None,
+                "PAY-011", date(2024, 3, 1), 180.00, "Bank Transfer",
+                "Thea Queen", "Sister", 40, 800000.00,
+                None, None, None, None,
+                None, None, None, None
+            ),
+
+            # Customer 12: Home Insurance
+            (
+                "Dinah", "Lance", date(1990, 6, 30), "Female", "dinah.l@email.com", "555-222-8888",
+                "SCP Central City Police Department", "Central City", "MO", "63101",
+                "POL-1012", ["Home Insurance"], "HOME-012", date(2023, 11, 1), date(2026, 11, 1), 95.00,
+                "AGT-005", "Barry Allen", "barry.a@insure.com", "555-987-2345",
+                None, None, None,
+                "PAY-012", date(2023, 11, 1), 95.00, "Credit Card",
+                None, None, None, None,
+                "14 Police Plaza, Central City, MO", 550000.00, "Apartment", "Building",
+                None, None, None, None
+            ),
+
+            # Customer 13: Auto Insurance
+            (
+                "Wally", "West", date(1995, 2, 18), "Male", "wally.w@email.com", "555-333-7777",
+                "Keystone City", "Keystone City", "KS", "66001",
+                "POL-1013", ["Auto Insurance"], "AUTO-013", date(2022, 8, 15), date(2023, 8, 15), 110.25,
+                "AGT-005", "Barry Allen", "barry.a@insure.com", "555-987-2345",
+                None, None, None,
+                "PAY-013", date(2023, 8, 15), 110.25, "Credit Card",
+                None, None, None, None,
+                None, None, None, None,
+                "Ford", "Mustang", 2017, "Collision"
+            ),
+
+            # Customer 14: Life and Home Insurance
+            (
+                "Iris", "West", date(1994, 7, 9), "Female", "iris.w@email.com", "555-444-6666",
+                "Central City Citizen, Central City", "Central City", "MO", "63102",
+                "POL-1014", ["Life Insurance", "Home Insurance"], "LH-014", date(2024, 1, 1), date(2044, 1, 1), 210.00,
+                "AGT-005", "Barry Allen", "barry.a@insure.com", "555-987-2345",
+                None, None, None,
+                "PAY-014", date(2024, 1, 1), 210.00, "Bank Transfer",
+                "Joe West", "Father", 20, 250000.00,
+                "Central City Citizen, Central City, MO", 600000.00, "Condo", "Contents",
+                None, None, None, None
+            ),
+
+            # Customer 15: Life and Auto Insurance
+            (
+                "Kara", "Danvers", date(1987, 10, 20), "Female", "kara.d@email.com", "555-555-5555",
+                "National City", "National City", "CA", "91001",
+                "POL-1015", ["Life Insurance", "Auto Insurance"], "LA-015", date(2023, 5, 1), date(2053, 5, 1), 290.00,
+                "AGT-006", "James Olsen", "james.o@insure.com", "555-234-5678",
+                None, None, None,
+                "PAY-015", date(2023, 5, 1), 290.00, "Credit Card",
+                "Alura Zor-El", "Mother", 30, 900000.00,
+                None, None, None, None,
+                "Subaru", "Outback", 2023, "Comprehensive"
+            ),
+
+            # Customer 16: Home and Auto Insurance
+            (
+                "Lena", "Luthor", date(1992, 11, 14), "Female", "lena.l@email.com", "555-666-4444",
+                "L-Corp, National City", "National City", "CA", "91002",
+                "POL-1016", ["Home Insurance", "Auto Insurance"], "HA-016", date(2022, 12, 1), date(2025, 12, 1), 175.40,
+                "AGT-006", "James Olsen", "james.o@insure.com", "555-234-5678",
+                None, None, None,
+                "PAY-016", date(2023, 12, 1), 175.40, "Bank Transfer",
+                None, None, None, None,
+                "L-Corp, National City, CA", 800000.00, "Condo", "Building",
+                "Audi", "e-tron", 2024, "Collision"
+            ),
+
+            # Customer 17: Life, Home, and Auto Insurance
+            (
+                "J'onn", "J'onzz", date(1970, 8, 28), "Male", "jonn.j@email.com", "555-777-3333",
+                "DEO, National City", "National City", "CA", "91003",
+                "POL-1017", ["Life Insurance", "Home Insurance", "Auto Insurance"], "LHA-017", date(2024, 4, 1), date(2044, 4, 1), 350.00,
+                "AGT-006", "James Olsen", "james.o@insure.com", "555-234-5678",
+                None, None, None,
+                "PAY-017", date(2024, 4, 1), 350.00, "Credit Card",
+                "M'gann M'orzz", "Wife", 20, 1000000.00,
+                "DEO, National City, CA", 950000.00, "Single Family", "Liability",
+                "Tesla", "Cybertruck", 2025, "Comprehensive"
+            ),
+            # Customer 18: Life Insurance
+            (
+                "Barry", "Allen", date(1989, 3, 14), "Male", "barry.allen@email.com", "555-888-2222",
+                "Central City Police Department", "Central City", "MO", "63101",
+                "POL-1018", ["Life Insurance"], "LIFE-018", date(2024, 6, 1), date(2064, 6, 1), 220.00,
+                "AGT-005", "Barry Allen", "barry.a@insure.com", "555-987-2345",
+                None, None, None,
+                "PAY-018", date(2024, 6, 1), 220.00, "Credit Card",
+                "Iris West", "Spouse", 40, 700000.00,
+                None, None, None, None,
+                None, None, None, None
+            ),
+
+            # Customer 19: Home Insurance
+            (
+                "Oliver", "Queen", date(1985, 4, 12), "Male", "oliver.queen@email.com", "555-999-1111",
+                "Queen Mansion, Starling City", "Starling City", "WA", "98001",
+                "POL-1019", ["Home Insurance"], "HOME-019", date(2023, 12, 1), date(2026, 12, 1), 110.00,
+                "AGT-004", "Felicity Smoak", "felicity.s@insure.com", "555-123-7890",
+                None, None, None,
+                "PAY-019", date(2023, 12, 1), 110.00, "Bank Transfer",None, None, None, None,
+                "Queen Mansion, Starling City, WA", 1200000.00, "Single Family", "Building",
+                None, None, None, None
+            ),
+
+            # Customer 20: Auto Insurance
+            (
+                "Clark", "Kent", date(1989, 12, 7), "Male", "clark.kent@email.com", "555-000-2222",
+                "344 Clinton Street, Metropolis", "Metropolis", "NY", "10009",
+                "POL-1020", ["Auto Insurance"], "AUTO-020", date(2023, 9, 1), date(2024, 9, 1), 140.00,
+                "AGT-007", "Lois Lane", "lois.lane@insure.com", "555-456-7890",
+                None, None, None,
+                "PAY-020", date(2023, 9, 1), 140.00, "Credit Card",
+                None, None, None, None,
+                None, None, None, None,
+                "Ford", "F-150", 2022, "Comprehensive"
             )
         ]
         
@@ -139,7 +357,7 @@ def create_insurance_table_with_data():
                 %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
             """, sample_data)
-            print("Inserted 3 sample records")
+            print("Inserted 20 sample data records")
         else:
             print("Table already contains data - no samples inserted")
         

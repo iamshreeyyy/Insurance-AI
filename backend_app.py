@@ -10,15 +10,18 @@ from agno.storage.postgres import PostgresStorage
 from agno.models.google import Gemini
 from flask import Flask, request, jsonify
 import traceback
-
 import os
 from dotenv import load_dotenv
+import google.auth.transport.requests
+import google.oauth2.id_token
+import json
 
 load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 PG_DB_URL = os.getenv("PG_DB_URL")
+CLIENT_ID = os.getenv("CLIENT_ID")  # Load Client ID from environment variables
 storage = PostgresStorage(table_name="agent_sessions", db_url=PG_DB_URL,auto_upgrade_schema=True)
 
 # Initialize Milvus vector database
@@ -39,7 +42,6 @@ url_pdf_knowledge_base = PDFUrlKnowledgeBase(
     vector_db=Milvus(
         collection="insurance_details_handbook",
         uri=milvus_uri,
-        # token="your_token", # Uncomment and replace if your Milvus has authentication
         embedder=openai_embedder
     ),
     chunking_strategy=DocumentChunking(),
@@ -53,7 +55,7 @@ knowledge_base = CombinedKnowledgeBase(
     vector_db=Milvus(
         collection="combined_knowledge",
         uri=milvus_uri,
-        embedder=openai_embedder 
+        embedder=openai_embedder
     ),
 )
 
@@ -110,17 +112,47 @@ agent = Agent(
 
 app = Flask(__name__)
 
+def verify_token(id_token, client_id):
+    """Verifies the Google ID token."""
+    try:
+        request = google.auth.transport.requests.Request()
+        claims = google.oauth2.id_token.verify_oauth2_token(
+            id_token, request, client_id
+        )
+        if not claims:
+            return None
+        return claims
+    except ValueError:
+        # Invalid token
+        return None
+
 @app.route('/query', methods=['POST'])
 def handle_query():
+    auth_header = request.headers.get('Authorization')
+    if not auth_header or not auth_header.startswith('Bearer '):
+        return jsonify({"error": "Unauthorized: Missing or invalid Authorization header"}), 401
+
+    id_token = auth_header.split(' ')[1]
+
+    if not CLIENT_ID:
+        return jsonify({"error": "Backend not properly configured: Missing CLIENT_ID environment variable"}), 500
+
+    claims = verify_token(id_token, CLIENT_ID)
+
+    if not claims:
+        return jsonify({"error": "Unauthorized: Invalid or expired token"}), 401
+
+    user_id = claims.get('sub') # Google's unique user ID
+
     data = request.get_json()
     user_input = data.get('user_input')
     if not user_input:
         return jsonify({"error": "Missing user_input"}), 400
 
-    print(f"Received user input: '{user_input}'")
+    print(f"Received user input from user {user_id}: '{user_input}'")
 
     try:
-        response: RunResponse = agent.run(user_input)
+        response: RunResponse = agent.run(user_input, user_id=user_id) # Pass user_id for session management
 
         if response and hasattr(response, 'content'):
             agent_response_text = response.content
@@ -136,7 +168,6 @@ def handle_query():
         return jsonify({"error": "Internal Server Error", "details": str(e)}), 500
 
 if __name__ == "__main__":
-    # Comment out after first run if you hae loaded the knowledge base
-    knowledge_base.load(recreate=False)
-
+    # Comment out after first run if you have loaded the knowledge base
+    knowledge_base.load(recreate=False, skip_existing=True)
     app.run(debug=True, port=8000)

@@ -19,3 +19,5 @@ sqlalchemy
 fastapi
 uvicorn
 flask
+streamlit-oauth
+google-auth
