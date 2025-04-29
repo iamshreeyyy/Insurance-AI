@@ -96,6 +96,7 @@ def main():
         if st.sidebar.button("Logout"):
             del st.session_state["auth"]
             del st.session_state["token"]
+            st.session_state.messages = [] # Clear chat on logout for a clean slate
             st.rerun()
 
         st.sidebar.title("Insurance AI Options")

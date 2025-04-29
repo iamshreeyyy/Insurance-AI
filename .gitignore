@@ -41,14 +41,8 @@ agent-ui\
 agent-ui/
 
 # Folders
-old_code/
-other_code/
 volumes/
 
-# yaml files
-user.yaml
-embedEtcd.yaml
-
-standalone.bat
 client_secret.json
-secrets.toml
+database_files/
+data/insurance_data_strings.pdf

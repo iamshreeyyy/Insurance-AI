@@ -21,3 +21,4 @@ uvicorn
 flask
 streamlit-oauth
 google-auth
+chromadb
