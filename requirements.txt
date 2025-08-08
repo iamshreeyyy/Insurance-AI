@@ -22,3 +22,6 @@ flask
 streamlit-oauth
 google-auth
 chromadb
+pydantic
+requests
+httpx
